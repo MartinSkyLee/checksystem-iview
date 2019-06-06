@@ -7,8 +7,34 @@ export default new Vuex.Store({
         menus: [
             {
                 'menuId': '1',
-                'name': '人员信息',
-                'subMenus': []
+                'name': '基础信息管理',
+                'subMenus': [
+                    {
+                        'menuId': '1-1',
+                        'name': '人员管理',
+                        'menuUrl': '/'
+                    },
+                    {
+                        'menuId': '1-2',
+                        'name': '公司管理',
+                        'menuUrl': '/companyManage'
+                    },
+                    // {
+                    //     'menuId': '1-3',
+                    //     'name': '工种管理',
+                    //     'menuUrl': ''
+                    // },
+                    // {
+                    //     'menuId': '1-4',
+                    //     'name': '打卡点管理',
+                    //     'menuUrl': ''
+                    // },
+                    // {
+                    //     'menuId': '1-5',
+                    //     'name': '工区管理',
+                    //     'menuUrl': ''
+                    // }
+                ]
             },
             {
                 'menuId': '2',
@@ -17,38 +43,12 @@ export default new Vuex.Store({
                     {
                         'menuId': '2-1',
                         'name': '最新情况',
-                        'menuUrl': ''
+                        'menuUrl': '/statistic'
                     },
                     {
                         'menuId': '2-2',
                         'name': '进退统计',
-                        'menuUrl': ''
-                    }
-                ]
-            },
-            {
-                'menuId': '3',
-                'name': '系统管理',
-                'subMenus': [
-                    {
-                        'menuId': '3-1',
-                        'name': '公司管理',
-                        'menuUrl': ''
-                    },
-                    {
-                        'menuId': '3-2',
-                        'name': '工种管理',
-                        'menuUrl': ''
-                    },
-                    {
-                        'menuId': '3-3',
-                        'name': '打卡点管理',
-                        'menuUrl': ''
-                    },
-                    {
-                        'menuId': '3-4',
-                        'name': '工区管理',
-                        'menuUrl': ''
+                        'menuUrl': '/checkHistory'
                     }
                 ]
             }

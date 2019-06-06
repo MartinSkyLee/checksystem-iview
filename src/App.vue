@@ -5,57 +5,45 @@
         <Menu mode="horizontal" theme="dark" active-name="1">
           <!-- <div class="layout-logo"></div> -->
           <!-- <div class="layout-nav"> -->
-            <!-- <MenuItem name="1">
-              <Icon type="ios-navigate"></Icon>Item 1
-            </MenuItem>
-            <MenuItem name="2">
-              <Icon type="ios-keypad"></Icon>Item 2
-            </MenuItem>
-            <MenuItem name="3">
-              <Icon type="ios-analytics"></Icon>Item 3
-            </MenuItem> -->
-            <!-- <MenuItem name="4">
-              <Icon type="ios-paper"></Icon>Item 4
-            </MenuItem> -->
+          <!-- <MenuItem name="1">
+            <Icon type="ios-navigate"></Icon>Item 1
+          </MenuItem>-->
           <!-- </div> -->
         </Menu>
       </Header>
       <Layout>
         <Sider hide-trigger :style="{background: '#fff'}">
-          <Menu active-name="1-2" theme="light" width="auto" :open-names="['1']">
-            <Submenu name="1">
+          <Menu
+            ref="navMenu"
+            :active-name="activeName"
+            :open-names="[openName]"
+            theme="light"
+            width="auto"
+          >
+            <Submenu v-for="(item,index) in menus" :key="index" :name="item.menuId">
               <template slot="title">
-                <Icon type="ios-navigate"></Icon>人员信息
+                <Icon type="ios-keypad"></Icon>
+                {{item.name}}
               </template>
-              <MenuItem name="1-1">人员管理</MenuItem>
-            </Submenu>
-            <Submenu name="2">
-              <template slot="title">
-                <Icon type="ios-keypad"></Icon>统计分析
-              </template>
-              <MenuItem name="2-1">最新情况</MenuItem>
-              <MenuItem name="2-2">进退统计</MenuItem>
-            </Submenu>
-            <Submenu name="3">
-              <template slot="title">
-                <Icon type="ios-analytics"></Icon>系统管理
-              </template>
-              <MenuItem name="3-1">公司管理</MenuItem>
-              <MenuItem name="3-2">工种管理</MenuItem>
-              <MenuItem name="3-3">打卡点管理</MenuItem>
-              <MenuItem name="3-4">工区管理</MenuItem>
+              <MenuItem
+                v-for="(sub,index) in item.subMenus"
+                :key="index"
+                :to="sub.menuUrl"
+                :name="sub.menuId"
+                @click.native="selectedMenu(item.name,sub.name)"
+              >{{sub.name}}</MenuItem>
             </Submenu>
           </Menu>
         </Sider>
         <Layout :style="{padding: '0 24px 24px'}">
           <Breadcrumb :style="{margin: '24px 0'}">
-            <BreadcrumbItem>Home</BreadcrumbItem>
-            <BreadcrumbItem>Components</BreadcrumbItem>
-            <BreadcrumbItem>Layout</BreadcrumbItem>
+            <BreadcrumbItem>首页</BreadcrumbItem>
+            <BreadcrumbItem>{{selectedFirstMenu}}</BreadcrumbItem>
+            <BreadcrumbItem>{{selectedSecondMenu}}</BreadcrumbItem>
           </Breadcrumb>
           <Content :style="{padding: '24px', minHeight: '280px', background: '#fff'}">
             <!-- Content -->
-            <router-view/>
+            <router-view v-on:listenToParentEvent="childComponent"></router-view>
           </Content>
         </Layout>
       </Layout>
@@ -65,13 +53,41 @@
 
 <script>
 export default {
-  name: "App"
+  name: "App",
+  data() {
+    return {
+      menus: this.$store.state.menus,
+      selectedFirstMenu: "",
+      selectedSecondMenu: "",
+      activeName: "",
+      openName: ""
+    };
+  },
+  methods: {
+    selectedMenu: function(itemName, subName) {
+      this.selectedFirstMenu = itemName;
+      this.selectedSecondMenu = subName;
+    },
+    childComponent: function(childName, parentName, childId, parentId) {
+      this.selectedFirstMenu = parentName;
+      this.selectedSecondMenu = childName;
+      this.activeName = childId;
+      this.openName = childId.split("-")[0];
+    }
+  },
+  mounted() {
+    this.$nextTick(() => {
+      this.$refs.navMenu.updateOpened(); //手动更新展开的子目录
+      this.$refs.navMenu.updateActiveName(); //手动更新当前选择项
+    });
+  }
 };
 </script>
 
 <style>
-html, body{
-  margin:0;
+html,
+body {
+  margin: 0;
   height: 100%;
 }
 #app {

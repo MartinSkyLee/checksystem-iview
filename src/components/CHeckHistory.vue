@@ -1,6 +1,6 @@
 <template>
   <div>
-      <h1>{{title}}</h1>
+      <h1>{{childName}}</h1>
   </div>
 </template>
 
@@ -9,8 +9,18 @@ export default {
   components: {},
   data() {
     return {
-        title:"进退统计"
+      childId: "2-2",
+      childName: "进退统计",
+      parentName: "统计分析"
     }
+  },
+  mounted() {
+    this.$emit(
+      "listenToParentEvent",
+      this.childName,
+      this.parentName,
+      this.childId
+    );
   }
 }
 </script>
