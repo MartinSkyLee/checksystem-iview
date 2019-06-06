@@ -98,6 +98,7 @@ export default {
 <style scoped>
 .hello{
   text-align: center;
+  height: 100%;
 }
 h1, h2 {
   font-weight: normal;

@@ -3,9 +3,9 @@
     <Layout :style="{minHeight: '100vh'}">
       <Header>
         <Menu mode="horizontal" theme="dark" active-name="1">
-          <div class="layout-logo"></div>
-          <div class="layout-nav">
-            <MenuItem name="1">
+          <!-- <div class="layout-logo"></div> -->
+          <!-- <div class="layout-nav"> -->
+            <!-- <MenuItem name="1">
               <Icon type="ios-navigate"></Icon>Item 1
             </MenuItem>
             <MenuItem name="2">
@@ -13,11 +13,11 @@
             </MenuItem>
             <MenuItem name="3">
               <Icon type="ios-analytics"></Icon>Item 3
-            </MenuItem>
+            </MenuItem> -->
             <!-- <MenuItem name="4">
               <Icon type="ios-paper"></Icon>Item 4
             </MenuItem> -->
-          </div>
+          <!-- </div> -->
         </Menu>
       </Header>
       <Layout>
@@ -27,6 +27,7 @@
               <template slot="title">
                 <Icon type="ios-navigate"></Icon>人员信息
               </template>
+              <MenuItem name="1-1">人员管理</MenuItem>
             </Submenu>
             <Submenu name="2">
               <template slot="title">
@@ -84,7 +85,7 @@ html, body{
   border-radius: 4px;
   overflow: hidden;
 }
-.layout-logo {
+/* .layout-logo {
   width: 100px;
   height: 30px;
   background: #5b6270;
@@ -98,5 +99,5 @@ html, body{
   width: 420px;
   margin: 0 auto;
   margin-right: 20px;
-}
+} */
 </style>
